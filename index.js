@@ -15,6 +15,18 @@ fs.readFile('../../../Downloads/test.gpx', 'utf8', (err, xml) => {
       return
     }
 
-    console.log(result.gpx.rte[0].rtept);
+    const routePoints = result.gpx.rte[0].rtept;
+
+    const timeDiff = routePoints.reduce((timeDiffAcc, routePoint, i) => {
+      if (i === 0) {
+        return timeDiffAcc;
+      }
+
+      let elevationDiff = parseFloat(routePoints[i].ele[0]) - parseFloat(routePoints[i-1].ele[0]);
+
+      
+    }, 0);
+
+    console.log('Time difference (sec): ', timeDiff);
   });
 });
