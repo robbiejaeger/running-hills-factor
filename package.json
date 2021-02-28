@@ -1,0 +1,19 @@
+{
+  "name": "hills-factor",
+  "version": "1.0.0",
+  "description": "Calculate how much time expected to gain or lose based on course elevation map",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "running",
+    "hills",
+    "course",
+    "map",
+    "gpx",
+    "pace"
+  ],
+  "author": "Robbie Jaeger",
+  "license": "ISC"
+}
