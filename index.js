@@ -10,4 +10,4 @@ fs.readFile('../../../Downloads/test.gpx', 'utf8' , (err, xml) => {
   parseString(xml, (err, result) => {
     console.log(result.gpx.rte[0].rtept);
   });
-})
+});
