@@ -4,7 +4,7 @@
   "description": "Calculate how much time expected to gain or lose based on course elevation map",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest test/**"
   },
   "keywords": [
     "running",

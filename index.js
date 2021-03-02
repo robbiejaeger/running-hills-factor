@@ -18,7 +18,7 @@ const cleanRoutePoints = routePoints => {
   })
 };
 
-const calcPercentGrade = (elevationChange, distanceChange) => {
+export const calcPercentGrade = (elevationChange, distanceChange) => {
   // assumes elevation and distance are the same units
   return (elevationChange / distanceChange) * 100;
 };
@@ -55,22 +55,22 @@ const calcTotalTimeDiff = routePoints => {
   }, 0);
 }
 
-fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
-  if (err) {
-    console.error(err);
-    return
-  }
-
-  parser.parseString(xml, (err, result) => {
-    if (err) {
-      console.error(err);
-      return
-    }
-
-    let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
-
-    let timeDiff = calcTotalTimeDiff(routePoints);
-
-    console.log('Time difference (sec): ', timeDiff);
-  });
-});
+// fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
+//   if (err) {
+//     console.error(err);
+//     return
+//   }
+//
+//   parser.parseString(xml, (err, result) => {
+//     if (err) {
+//       console.error(err);
+//       return
+//     }
+//
+//     let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
+//
+//     let timeDiff = calcTotalTimeDiff(routePoints);
+//
+//     console.log('Time difference (sec): ', timeDiff);
+//   });
+// });
