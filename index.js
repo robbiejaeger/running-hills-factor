@@ -35,6 +35,26 @@ const calcTimeDiff = (percentGrade, distance) => {
   }
 };
 
+const calcTotalTimeDiff = routePoints => {
+  return routePoints.reduce((timeDiffAcc, routePoint, i) => {
+    if (i === 0) {
+      return timeDiffAcc;
+    }
+
+    let elevationDiff = routePoints[i].ele - routePoints[i-1].ele;
+
+    let start = {latitude: routePoints[i-1].lat, longitude: routePoints[i-1].lon};
+    let end = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
+    let distanceDiff = getDistance(start, end, 0.1);
+
+    let percentGrade = calcPercentGrade(elevationDiff, distanceDiff);
+
+    let timeDiff = calcTimeDiff(percentGrade, distanceDiff);
+
+    return timeDiffAcc += timeDiff;
+  }, 0);
+}
+
 fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
   if (err) {
     console.error(err);
@@ -47,25 +67,9 @@ fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
       return
     }
 
-    const routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
+    let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
 
-    const timeDiff = routePoints.reduce((timeDiffAcc, routePoint, i) => {
-      if (i === 0) {
-        return timeDiffAcc;
-      }
-
-      let elevationDiff = routePoints[i].ele - routePoints[i-1].ele;
-
-      let start = {latitude: routePoints[i-1].lat, longitude: routePoints[i-1].lon};
-      let end = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
-      let distanceDiff = getDistance(start, end, 0.1);
-
-      let percentGrade = calcPercentGrade(elevationDiff, distanceDiff);
-
-      let timeDiff = calcTimeDiff(percentGrade, distanceDiff);
-
-      return timeDiffAcc += timeDiff;
-    }, 0);
+    let timeDiff = calcTotalTimeDiff(routePoints);
 
     console.log('Time difference (sec): ', timeDiff);
   });
