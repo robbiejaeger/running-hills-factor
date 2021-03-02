@@ -1,6 +1,6 @@
-const fs = require('fs');
-const xml2js = require('xml2js');
-const getDistance = require('geolib').getDistance;
+import fs from 'fs';
+import xml2js from 'xml2js';
+import geolib from 'geolib';
 
 const parser = new xml2js.Parser({mergeAttrs: true});
 
@@ -45,7 +45,7 @@ const calcTotalTimeDiff = routePoints => {
 
     let start = {latitude: routePoints[i-1].lat, longitude: routePoints[i-1].lon};
     let end = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
-    let distanceDiff = getDistance(start, end, 0.1);
+    let distanceDiff = geolib.getDistance(start, end, 0.1);
 
     let percentGrade = calcPercentGrade(elevationDiff, distanceDiff);
 

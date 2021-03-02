@@ -4,7 +4,7 @@
   "description": "Calculate how much time expected to gain or lose based on course elevation map",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [
     "running",
@@ -19,5 +19,9 @@
   "dependencies": {
     "geolib": "^3.3.1",
     "xml2js": "^0.4.23"
-  }
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "type": "module"
 }
