@@ -18,7 +18,24 @@ const cleanRoutePoints = routePoints => {
   })
 };
 
-fs.readFile('../../../Downloads/test.gpx', 'utf8', (err, xml) => {
+const calcPercentGrade = (elevationChange, distanceChange) => {
+  // assumes elevation and distance are the same units
+  return (elevationChange / distanceChange) * 100;
+};
+
+// Uphill: every % incline slows down 12-15 second per mile
+// Downhill: every % decline increase 8 seconds per mile
+const calcTimeDiff = (percentGrade, distance) => {
+  if (percentGrade > 0) {
+    return metersToMiles(distance) * -15;
+  } else if (percentGrade < 0) {
+    return metersToMiles(distance) * 8;
+  } else {
+    return 0;
+  }
+};
+
+fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
   if (err) {
     console.error(err);
     return
@@ -43,7 +60,11 @@ fs.readFile('../../../Downloads/test.gpx', 'utf8', (err, xml) => {
       let end = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
       let distanceDiff = getDistance(start, end, 0.1);
 
-      return timeDiffAcc += metersToMiles(distanceDiff);
+      let percentGrade = calcPercentGrade(elevationDiff, distanceDiff);
+
+      let timeDiff = calcTimeDiff(percentGrade, distanceDiff);
+
+      return timeDiffAcc += timeDiff;
     }, 0);
 
     console.log('Time difference (sec): ', timeDiff);
