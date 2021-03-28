@@ -1,7 +1,7 @@
 {
-  "name": "hills-factor",
+  "name": "running-hills-factor",
   "version": "1.0.0",
-  "description": "Calculate how much time expected to gain or lose based on course elevation map",
+  "description": "Calculate how much running time is expected to be gained or lost based on course elevation map",
   "main": "index.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest test/**"

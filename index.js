@@ -1,8 +1,8 @@
-import fs from 'fs';
 import xml2js from 'xml2js';
 import geolib from 'geolib';
+import { readFile } from 'fs/promises';
 
-const parser = new xml2js.Parser({mergeAttrs: true});
+const xmlParser = new xml2js.Parser({mergeAttrs: true});
 
 const metersToMiles = meters => {
   return meters * 0.00062137;
@@ -55,22 +55,25 @@ const calcTotalTimeDiff = routePoints => {
   }, 0);
 }
 
-// fs.readFile('../../../Downloads/uphill-2mi.gpx', 'utf8', (err, xml) => {
-//   if (err) {
-//     console.error(err);
-//     return
-//   }
-//
-//   parser.parseString(xml, (err, result) => {
-//     if (err) {
-//       console.error(err);
-//       return
-//     }
-//
-//     let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
-//
-//     let timeDiff = calcTotalTimeDiff(routePoints);
-//
-//     console.log('Time difference (sec): ', timeDiff);
-//   });
-// });
+const calculateHillsFactor = filepath => {
+  return readFile(filepath, 'utf8')
+    .then(xml => {
+      let formattedTimeDiff;
+      xmlParser.parseString(xml, (err, result) => {
+        if (err) {
+          console.error(err);
+          return
+        }
+
+        let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
+
+        let timeDiff = calcTotalTimeDiff(routePoints);
+
+        formattedTimeDiff = timeDiff.toFixed(1);
+      });
+      return formattedTimeDiff;
+    })
+    .catch(err => console.error(err));
+};
+
+export default calculateHillsFactor;
