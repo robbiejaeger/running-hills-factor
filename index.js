@@ -23,7 +23,7 @@ export const calcPercentGrade = (elevationChange, distanceChange) => {
   return (elevationChange / distanceChange) * 100;
 };
 
-// Uphill: every % incline slows down 12-15 second per mile
+// Uphill: every % incline slows down 12-15 seconds per mile
 // Downhill: every % decline increase 8 seconds per mile
 const calcTimeDiff = (percentGrade, distance) => {
   if (percentGrade > 0) {
