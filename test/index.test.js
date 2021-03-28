@@ -1,4 +1,5 @@
-import calculateHillsFactor, { calcPercentGrade } from '../index.js';
+import calculateHillsFactor  from '../index.js';
+import { calcPercentGrade } from '../src/util';
 
 describe('Percent grade calculator', () => {
   it('gives a positive grade', () => {

@@ -2,7 +2,7 @@
   "name": "running-hills-factor",
   "version": "1.0.0",
   "description": "Calculate how much running time is expected to be gained or lost based on course elevation map",
-  "main": "index.js",
+  "module": "index.js",
   "scripts": {
     "test": "NODE_OPTIONS=--experimental-vm-modules jest test/**"
   },
@@ -16,6 +16,11 @@
   ],
   "author": "Robbie Jaeger",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robbiejaeger/running-hills-factor"
+  },
+  "sideEffects": false,
   "dependencies": {
     "geolib": "^3.3.1",
     "xml2js": "^0.4.23"
