@@ -1,6 +1,6 @@
 # Running Hills Factor
 
-Running Hills Factor calculates how much time could be expected to be gained or lost while running due to hills.
+How much should a runner factor in the hills for a particular route to alter an expected finish time? Running Hills Factor calculates how much time could be expected to be gained or lost while running due to hills.
 
 ### Methodology
 

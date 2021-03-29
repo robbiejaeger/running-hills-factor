@@ -2,18 +2,18 @@ export const metersToMiles = meters => {
   return meters * 0.00062137;
 };
 
-export const calcPercentGrade = (elevationChange, distanceChange) => {
+export const calcPercentGrade = (segmentElevationDiff, segmentDistance) => {
   // assumes elevation and distance are the same units
-  return (elevationChange / distanceChange) * 100;
+  return (segmentElevationDiff / segmentDistance) * 100;
 };
 
 // Uphill: every % incline slows down 15 seconds per mile (can range 12-15)
 // Downhill: every % decline increase 8 seconds per mile
-export const calcTimeDiff = (percentGrade, distance) => {
-  if (percentGrade > 0) {
-    return metersToMiles(distance) * 15 * percentGrade;
-  } else if (percentGrade < 0) {
-    return metersToMiles(distance) * 8 * percentGrade;
+export const calcTimeDiff = (segmentPercentGrade, segmentDistance) => {
+  if (segmentPercentGrade > 0) {
+    return metersToMiles(segmentDistance) * 15 * segmentPercentGrade;
+  } else if (segmentPercentGrade < 0) {
+    return metersToMiles(segmentDistance) * 8 * segmentPercentGrade;
   } else {
     return 0;
   }
@@ -35,16 +35,16 @@ export const calcTotalTimeDiff = (routePoints, geolib) => {
       return timeDiffAcc;
     }
 
-    let elevationDiff = routePoints[i].ele - routePoints[i-1].ele;
+    let segmentElevationDiff = routePoints[i].ele - routePoints[i-1].ele;
 
-    let start = {latitude: routePoints[i-1].lat, longitude: routePoints[i-1].lon};
-    let end = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
-    let distanceDiff = geolib.getDistance(start, end, 0.1);
+    let segmentStart = {latitude: routePoints[i-1].lat, longitude: routePoints[i-1].lon};
+    let segmentEnd = {latitude: routePoints[i].lat, longitude: routePoints[i].lon};
+    let segmentDistance = geolib.getDistance(segmentStart, segmentEnd, 0.1);
 
-    let percentGrade = calcPercentGrade(elevationDiff, distanceDiff);
+    let segmentPercentGrade = calcPercentGrade(segmentElevationDiff, segmentDistance);
 
-    let timeDiff = calcTimeDiff(percentGrade, distanceDiff);
+    let segmentTimeDiff = calcTimeDiff(segmentPercentGrade, segmentDistance);
 
-    return timeDiffAcc += timeDiff;
+    return timeDiffAcc += segmentTimeDiff;
   }, 0);
 }
