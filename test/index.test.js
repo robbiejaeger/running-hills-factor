@@ -8,10 +8,24 @@ describe('End-to-end tests', () => {
     expect(timeDiff).toEqual("0.0");
   });
 
-  it('returns zero for equal gain and loss', async () => {
+  it('returns zero for equal gain and loss for default incline/decline', async () => {
     const runningHillsFactor = new RunningHillsFactor();
     let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-net-no-gain-or-loss.gpx');
 
     expect(timeDiff).toEqual("0.0");
+  });
+
+  it('returns time gained for default decline factor', async () => {
+    const runningHillsFactor = new RunningHillsFactor();
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-decline.gpx');
+
+    expect(timeDiff).toEqual("8.0");
+  });
+
+  it('returns time lost for default incline factor', async () => {
+    const runningHillsFactor = new RunningHillsFactor();
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-incline.gpx');
+
+    expect(timeDiff).toEqual("-15.0");
   });
 });
