@@ -1,3 +1,3 @@
-import calculateHillsFactor from './src/calculateHillsFactor';
+import HillsFactor from './src/HillsFactor';
 
-export default calculateHillsFactor;
+export default HillsFactor;
