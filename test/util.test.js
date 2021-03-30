@@ -1,7 +1,8 @@
 import {
   calcPercentGrade,
   metersToMiles,
-  calcTimeDiff
+  calcTimeDiff,
+  cleanRoutePoints
 } from '../src/util';
 
 describe('Percent grade calculator', () => {
@@ -52,5 +53,29 @@ describe('Calculate time different for distance and percent grade', () => {
     let segmentTimeDiff = calcTimeDiff(0, 1609.34, 10, 5);
 
     expect(segmentTimeDiff).toEqual(0);
+  });
+});
+
+describe('Changes format of route points', () => {
+  it('converts route points from string to float', () => {
+    let routePoints = [
+      {
+        lat: ["39.78016"],
+        lon: ["-105.04978"],
+        ele: ["1203.54"]
+      }
+    ];
+
+    let convertedRoutePoints = cleanRoutePoints(routePoints);
+
+    let expectedRoutePoints = [
+      {
+        lat: 39.78016,
+        lon: -105.04978,
+        ele: 1203.54
+      }
+    ];
+
+    expect(convertedRoutePoints).toEqual(expectedRoutePoints);
   });
 });
