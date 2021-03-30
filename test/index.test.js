@@ -1,4 +1,4 @@
-import HillsFactor from '../index.js';
+import RunningHillsFactor from '../index.js';
 import { calcPercentGrade } from '../src/util';
 
 describe('Percent grade calculator', () => {
@@ -11,15 +11,15 @@ describe('Percent grade calculator', () => {
 
 describe('End-to-end tests', () => {
   it('returns zero gain or loss', async () => {
-    const hillsFactor = new HillsFactor();
-    let timeDiff = await hillsFactor.calculateHillsFactor('./test/sample-no-gain-or-loss.gpx');
+    const runningHillsFactor = new RunningHillsFactor();
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-no-gain-or-loss.gpx');
 
     expect(timeDiff).toEqual("0.0");
   });
 
   it('returns zero for equal gain and loss', async () => {
-    const hillsFactor = new HillsFactor();
-    let timeDiff = await hillsFactor.calculateHillsFactor('./test/sample-net-no-gain-or-loss.gpx');
+    const runningHillsFactor = new RunningHillsFactor();
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-net-no-gain-or-loss.gpx');
 
     expect(timeDiff).toEqual("-0.0");
   });

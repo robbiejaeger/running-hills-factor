@@ -1,3 +1,3 @@
-import HillsFactor from './src/HillsFactor';
+import RunningHillsFactor from './src/RunningHillsFactor';
 
-export default HillsFactor;
+export default RunningHillsFactor;

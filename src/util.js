@@ -9,11 +9,11 @@ export const calcPercentGrade = (segmentElevationDiff, segmentDistance) => {
 
 // Uphill: every % incline slows down 15 seconds per mile (can range 12-15)
 // Downhill: every % decline increase 8 seconds per mile
-export const calcTimeDiff = (segmentPercentGrade, segmentDistance) => {
+export const calcTimeDiff = (segmentPercentGrade, segmentDistance, inclineFactor, declineFactor) => {
   if (segmentPercentGrade > 0) {
-    return metersToMiles(segmentDistance) * 15 * segmentPercentGrade;
+    return metersToMiles(segmentDistance) * inclineFactor * segmentPercentGrade;
   } else if (segmentPercentGrade < 0) {
-    return metersToMiles(segmentDistance) * 8 * segmentPercentGrade;
+    return metersToMiles(segmentDistance) * declineFactor * segmentPercentGrade;
   } else {
     return 0;
   }
@@ -29,7 +29,7 @@ export const cleanRoutePoints = routePoints => {
   })
 };
 
-export const calcTotalTimeDiff = (routePoints, geolib) => {
+export const calcTotalTimeDiff = (routePoints, geolib, inclineFactor, declineFactor) => {
   return routePoints.reduce((timeDiffAcc, routePoint, i) => {
     if (i === 0) {
       return timeDiffAcc;
@@ -43,7 +43,7 @@ export const calcTotalTimeDiff = (routePoints, geolib) => {
 
     let segmentPercentGrade = calcPercentGrade(segmentElevationDiff, segmentDistance);
 
-    let segmentTimeDiff = calcTimeDiff(segmentPercentGrade, segmentDistance);
+    let segmentTimeDiff = calcTimeDiff(segmentPercentGrade, segmentDistance, inclineFactor, declineFactor);
 
     return timeDiffAcc += segmentTimeDiff;
   }, 0);

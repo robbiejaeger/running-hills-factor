@@ -9,9 +9,10 @@ import {
   calcTotalTimeDiff
 } from './util';
 
-export default class HillsFactor {
-  constructor(options) {
-
+export default class RunningHillsFactor {
+  constructor(options = {}) {
+    this.inclineFactor = options.inclineFactor || 15;
+    this.declineFactor = options.declineFactor || 8;
   };
 
   calculateHillsFactor = filepath => {
@@ -28,7 +29,7 @@ export default class HillsFactor {
 
           let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
 
-          let timeDiff = calcTotalTimeDiff(routePoints, geolib);
+          let timeDiff = calcTotalTimeDiff(routePoints, geolib, this.inclineFactor, this.declineFactor);
 
           formattedTimeDiff = timeDiff.toFixed(1);
         });

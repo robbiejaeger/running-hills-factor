@@ -22,16 +22,34 @@ npm install running-hills-factor
 Example usage:
 
 ```js
-import calculateHillsFactor from 'running-hills-factor';
+import RunningHillsFactor from 'running-hills-factor';
 
-calculateHillsFactor('./example.gpx')
+const runningHillsFactor = new RunningHillsFactor();
+
+runningHillsFactor.calculateHillsFactor('./example.gpx')
   .then(timeDifference => console.log('Total gained or lost time:', timeDifference))
   .catch(err => console.error('Error calculating hills factor:', err));
 ```
 
 ## API Documentation
 
-**function: calculateHillsFactor(filepath)**
+Running Hills Factor is designed with a class to be able to create multiple instances of the calculator with different configuration options.
+
+For example, one instance can be configured for a runner where for every % grade incline, they slow down 12 seconds per mile. Where another instance can represent another runner where for every % grade incline, they slow down 20 seconds per mile.
+
+### class: RunningHillsFactor(options)
+
+* `options` <[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)>
+  - `inclineFactor` <[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#number_type)> the number of seconds per mile each % grade incline slows down. _This number should be positive._ Defaults to `15` (seconds).
+  - `declineFactor` <[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#number_type)> the number of seconds per mile each % grade decline speeds up. _This number should be positive._ Defaults to `8` (seconds).
+
+Example `options` usage:
+
+```js
+const runningHillsFactor = new RunningHillsFactor({inclineFactor: 13, declineFactor: 7});
+```
+
+**RunningHillsFactor.calculateHillsFactor(filepath)**
 
 * `filepath`<[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#string_type)> Filepath to the running course route. Current support is for the [GPX file format](https://en.wikipedia.org/wiki/GPS_Exchange_Format) from [https://onthegomap.com/](https://onthegomap.com/).
-* returns: <[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)> where the resolved value is the total time gained or lost, and the rejected value is an error.
+* returns: <[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)> where the resolved value is the total time gained or lost in seconds, and the rejected value is an error.
