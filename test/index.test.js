@@ -1,13 +1,4 @@
 import RunningHillsFactor from '../index.js';
-import { calcPercentGrade } from '../src/util';
-
-describe('Percent grade calculator', () => {
-  it('gives a positive grade', () => {
-    let grade = calcPercentGrade(10, 10)
-
-    expect(grade).toEqual(100);
-  });
-})
 
 describe('End-to-end tests', () => {
   it('returns zero gain or loss', async () => {
