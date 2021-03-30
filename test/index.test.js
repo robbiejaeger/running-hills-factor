@@ -12,6 +12,6 @@ describe('End-to-end tests', () => {
     const runningHillsFactor = new RunningHillsFactor();
     let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-net-no-gain-or-loss.gpx');
 
-    expect(timeDiff).toEqual("-0.0");
+    expect(timeDiff).toEqual("0.0");
   });
 });

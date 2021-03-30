@@ -11,9 +11,9 @@ export const calcPercentGrade = (segmentElevationDiff, segmentDistance) => {
 // Downhill: every % decline increase 8 seconds per mile
 export const calcTimeDiff = (segmentPercentGrade, segmentDistance, inclineFactor, declineFactor) => {
   if (segmentPercentGrade > 0) {
-    return metersToMiles(segmentDistance) * inclineFactor * segmentPercentGrade;
+    return metersToMiles(segmentDistance) * -1 * inclineFactor * segmentPercentGrade;
   } else if (segmentPercentGrade < 0) {
-    return metersToMiles(segmentDistance) * declineFactor * segmentPercentGrade;
+    return metersToMiles(segmentDistance) * declineFactor * Math.abs(segmentPercentGrade);
   } else {
     return 0;
   }
