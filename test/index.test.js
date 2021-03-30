@@ -28,4 +28,18 @@ describe('End-to-end tests', () => {
 
     expect(timeDiff).toEqual("-15.0");
   });
+
+  it('returns time gained for custom decline factor', async () => {
+    const runningHillsFactor = new RunningHillsFactor({declineFactor: 7});
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-decline.gpx');
+
+    expect(timeDiff).toEqual("7.0");
+  });
+
+  it('returns time lost for custom incline factor', async () => {
+    const runningHillsFactor = new RunningHillsFactor({inclineFactor: 12});
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-incline.gpx');
+
+    expect(timeDiff).toEqual("-12.0");
+  });
 });
