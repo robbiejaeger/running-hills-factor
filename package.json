@@ -20,7 +20,6 @@
     "type": "git",
     "url": "https://github.com/robbiejaeger/running-hills-factor"
   },
-  "sideEffects": false,
   "dependencies": {
     "geolib": "^3.3.1",
     "xml2js": "^0.4.23"

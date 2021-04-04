@@ -7,7 +7,7 @@ import {
   calcTimeDiff,
   cleanRoutePoints,
   calcTotalTimeDiff
-} from './util';
+} from './util.js';
 
 export default class RunningHillsFactor {
   constructor(options = {}) {
