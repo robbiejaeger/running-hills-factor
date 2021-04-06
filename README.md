@@ -19,7 +19,7 @@ To install Running Hills Factor, use the command:
 npm install running-hills-factor
 ```
 
-Example usage:
+Example usage using ES modules:
 
 ```js
 import RunningHillsFactor from 'running-hills-factor';
@@ -31,7 +31,13 @@ runningHillsFactor.calculateHillsFactor('./example.gpx')
   .catch(err => console.error('Error calculating hills factor:', err));
 ```
 
-**Note:** Currently, only ES modules are supported (using `import` to bring the package into your codebase).
+If you're using CommonJS modules, then you can bring in the class with:
+
+```js
+const RunningHillsFactor = require('running-hills-factor');
+
+const runningHillsFactor = new RunningHillsFactor();
+```
 
 ## API Documentation
 
