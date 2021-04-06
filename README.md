@@ -60,4 +60,4 @@ const runningHillsFactor = new RunningHillsFactor({inclineFactor: 13, declineFac
 **RunningHillsFactor.calculateHillsFactor(filepath)**
 
 * `filepath`<[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#string_type)> Filepath to the running course route. Current support is for the [GPX file format](https://en.wikipedia.org/wiki/GPS_Exchange_Format) from [https://onthegomap.com/](https://onthegomap.com/).
-* returns: <[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)> where the resolved value is the total time gained or lost in seconds, and the rejected value is an error.
+* returns: <[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)> where the resolved value is the total time gained or lost in seconds, and the rejected value is an error. Time is gained if the resolved value is positive. Time is lost if the resolved value is negative.
