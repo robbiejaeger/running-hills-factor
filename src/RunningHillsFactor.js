@@ -1,5 +1,5 @@
 import xml2js from 'xml2js';
-import geolib from 'geolib';
+import { getDistance } from 'geolib';
 import { readFile } from 'fs/promises';
 import {
   metersToMiles,
@@ -29,7 +29,7 @@ export default class RunningHillsFactor {
 
           let routePoints = cleanRoutePoints(result.gpx.rte[0].rtept);
 
-          let timeDiff = calcTotalTimeDiff(routePoints, geolib, this.inclineFactor, this.declineFactor);
+          let timeDiff = calcTotalTimeDiff(routePoints, getDistance, this.inclineFactor, this.declineFactor);
 
           formattedTimeDiff = timeDiff.toFixed(1);
         });
