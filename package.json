@@ -17,7 +17,7 @@
     "pace"
   ],
   "author": "Robbie Jaeger",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/robbiejaeger/running-hills-factor"
