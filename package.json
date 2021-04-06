@@ -2,9 +2,12 @@
   "name": "running-hills-factor",
   "version": "1.0.0",
   "description": "Calculate how much running time is expected to be gained or lost based on course elevation map",
+  "main": "main/index.js",
   "module": "index.js",
   "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest test/**"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest test/**",
+    "babel-build": "rm -rf ./main && npx babel index.js -d main && npx babel src -d main/src",
+    "babel-buil": "babel --plugins @babel/plugin-transform-modules-commonjs index.js --out-file main/index.js"
   },
   "keywords": [
     "running",
@@ -25,7 +28,11 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "babel-plugin-transform-es2015-modules-commonjs-simple": "^6.7.4",
     "jest": "^26.6.3"
-  },
-  "type": "module"
+  }
 }

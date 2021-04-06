@@ -43,3 +43,13 @@ describe('End-to-end tests', () => {
     expect(timeDiff).toEqual("-12.0");
   });
 });
+
+describe('Runs using commonJS require', () => {
+  it('returns zero gain or loss', async () => {
+    const RunningHillsFactor = require('../main/index.js');
+    const runningHillsFactor = new RunningHillsFactor();
+    let timeDiff = await runningHillsFactor.calculateHillsFactor('./test/sample-no-gain-or-loss.gpx');
+
+    expect(timeDiff).toEqual("0.0");
+  });
+});
