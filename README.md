@@ -1,5 +1,7 @@
 # Running Hills Factor
 
+[![Node.js CI](https://github.com/robbiejaeger/running-hills-factor/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/robbiejaeger/running-hills-factor/actions/workflows/node.js.yml)
+
 How much should a runner factor in the hills for a particular route to alter an expected finish time? Running Hills Factor calculates how much time could be expected to be gained or lost while running due to hills.
 
 ### Methodology
